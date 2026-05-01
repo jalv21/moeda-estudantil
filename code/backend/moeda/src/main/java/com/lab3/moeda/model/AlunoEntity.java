@@ -7,9 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "alunos")
-public class AlunoEntity extends UsuarioEntity {
-    public static final int LIMITE_MOEDAS = 99999;
-
+public class AlunoEntity extends UsuarioAcademicoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +15,6 @@ public class AlunoEntity extends UsuarioEntity {
     private String rg;
     private String endereco;
     private String curso;
-
-    protected int saldoMoedas;
-    List<Transacao> historicoTransacoes;
 
     public AlunoEntity() {
         super();
@@ -31,27 +26,30 @@ public class AlunoEntity extends UsuarioEntity {
         this.rg = rg;
         this.endereco = endereco;
         this.curso = curso;
-        this.saldoMoedas = 0;
-        this.historicoTransacoes = new LinkedList<>();
     }
 
     public int getSaldo() { return saldoMoedas; }
 
+    @Override
     public void creditarMoedas(int valor) {
         if(saldoMoedas > LIMITE_MOEDAS)
-            throw new IllegalStateException("Não foi possível creditar. Usuário excedeu limite de moedas.");
+            throw new IllegalStateException("Não foi possível creditar. " +
+                    " Saldo do aluno excedeu o limite de moedas.");
 
         saldoMoedas += valor;
     }
 
+    @Override
     public void debitarMoedas(int valor) {
         if((saldoMoedas - valor) < 0)
-            throw new IllegalStateException("Não foi possível debitar. Usuário tem saldo insuficiente.");
+            throw new IllegalStateException("Não foi possível debitar. " +
+                    "Aluno não tem saldo suficiente.");
 
         saldoMoedas -= valor;
     }
 
-    public List<Transacao> consultarHistorico() {
+    @Override
+    public List<Transacao> consultarHistoricoTransacoes() {
         // TODO retorna histórico de transações do Aluno no formato de lista.
         throw new UnsupportedOperationException("Método ainda não implementado.");
     }
