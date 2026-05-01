@@ -13,6 +13,10 @@ public abstract class UsuarioComSaldoEntity<E> extends UsuarioEntity<E> {
         // historico = new List<Transacao>();
     }
 
+    protected UsuarioComSaldoEntity() {
+        super();
+    }
+
     public int getSaldo() { return saldoMoedas; }
 
     public void creditarMoedas(int valor) {

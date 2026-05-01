@@ -1,8 +1,15 @@
 package com.lab3.moeda.model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "alunos")
 public class AlunoEntity<E> extends UsuarioComSaldoEntity<E> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String cpf;
     private String rg;
     private String endereco;
@@ -14,6 +21,10 @@ public class AlunoEntity<E> extends UsuarioComSaldoEntity<E> {
         this.rg = rg;
         this.endereco = endereco;
         this.curso = curso;
+    }
+
+    public AlunoEntity() {
+        super();
     }
 
     @Override

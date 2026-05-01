@@ -14,6 +14,8 @@ public abstract class UsuarioEntity<E> {
         this.senha = "";
     }
 
+    protected UsuarioEntity() {}
+
     protected String getEmail() { return email; }
 
     protected void setEmail(String email) {
