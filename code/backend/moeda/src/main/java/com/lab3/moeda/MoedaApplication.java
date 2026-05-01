@@ -3,7 +3,7 @@ package com.lab3.moeda;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.lab3.moeda"})
 public class MoedaApplication {
 
 	public static void main(String[] args) {
