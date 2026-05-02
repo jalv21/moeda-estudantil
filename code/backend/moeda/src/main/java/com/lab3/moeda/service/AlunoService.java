@@ -60,6 +60,15 @@ public class AlunoService {
         return toResponseDTO(aluno);
     }
 
+    // DELETE
+    @Transactional
+    public void deletar(int id) {
+        if(!alunoRepository.existsById(id))
+            throw new NoSuchElementException("Aluno não encontrado.");
+
+        alunoRepository.deleteById(id);
+    }
+
     // Conversão entidade → DTO de resposta
     private AlunoResponseDTO toResponseDTO(AlunoEntity aluno) {
         return new AlunoResponseDTO(

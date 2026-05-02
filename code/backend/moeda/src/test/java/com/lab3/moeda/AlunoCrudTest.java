@@ -12,9 +12,9 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 public class AlunoCrudTest {
@@ -112,5 +112,15 @@ public class AlunoCrudTest {
         edicoesAlunos.add(alunoService.criar(alunoEditado));
         alunoService.atualizar(1, alunoEditado);
         assertEquals(alunoService.buscarPorId(1).curso(), edicoesAlunos.getFirst().curso());
+    }
+
+    @Test
+    void delete() {
+        alunoService.criar(aluno1Request);
+        alunoService.criar(aluno2Request);
+        alunoService.criar(aluno3Request);
+
+        alunoService.deletar(3);
+        assertThrows(NoSuchElementException.class, () -> alunoService.buscarPorId(3));
     }
 }
