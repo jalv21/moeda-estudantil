@@ -9,12 +9,12 @@ import java.util.List;
 public class AlunoEntity extends UsuarioAcademicoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(unique = true, nullable = false, length = 11)
+    @Column(unique = true, nullable = false)
     private String cpf;
 
-    @Column(unique = true, nullable = false, length = 9)
+    @Column(unique = true, nullable = false)
     private String rg;
 
     @Column(nullable = false, length = 200)
@@ -58,7 +58,7 @@ public class AlunoEntity extends UsuarioAcademicoEntity {
     }
 
     @Override
-    public List<Transacao> consultarHistoricoTransacoes() {
+    public List<TransacaoEntity> consultarHistoricoTransacoes() {
         // TODO retorna histórico de transações do Aluno no formato de lista.
         throw new UnsupportedOperationException("Método ainda não implementado.");
     }
