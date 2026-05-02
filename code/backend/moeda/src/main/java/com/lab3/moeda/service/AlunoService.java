@@ -4,7 +4,10 @@ import com.lab3.moeda.dto.AlunoRequestDTO;
 import com.lab3.moeda.dto.AlunoResponseDTO;
 import com.lab3.moeda.model.AlunoEntity;
 import com.lab3.moeda.repository.AlunoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AlunoService {
@@ -15,6 +18,7 @@ public class AlunoService {
     }
 
     // CREATE
+    @Transactional
     public AlunoResponseDTO criar(AlunoRequestDTO request) {
         AlunoEntity novoAluno = new AlunoEntity(
                 request.nome(), request.cpf(), request.rg(),
@@ -22,6 +26,15 @@ public class AlunoService {
         );
         AlunoEntity alunoSalvo = alunoRepository.save(novoAluno);
         return toResponseDTO(alunoSalvo);
+    }
+
+    // READ - todos
+    @Transactional
+    public List<AlunoResponseDTO> listarTodos() {
+        return alunoRepository.findAll()
+                .stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 
     // Conversão entidade → DTO de resposta

@@ -1,6 +1,7 @@
 package com.lab3.moeda;
 
 import com.lab3.moeda.dto.AlunoRequestDTO;
+import com.lab3.moeda.dto.AlunoResponseDTO;
 import com.lab3.moeda.model.AlunoEntity;
 import com.lab3.moeda.repository.AlunoRepository;
 import com.lab3.moeda.service.AlunoService;
@@ -9,31 +10,29 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class CrudTest {
     @Autowired
     private AlunoRepository alunoRepository;
-
     private AlunoService alunoService;
-
-    private AlunoEntity alice;
+    private AlunoEntity alice, beatriz, carol;
+    private AlunoRequestDTO aluno1Request, aluno2Request, aluno3Request;
 
     @BeforeEach
     void setUp() {
         alice = new AlunoEntity("Alice", "12345678910", "123456789", "Rua 1", "UFMG", "Biologia");
+        beatriz = new AlunoEntity("Beatriz", "23456789101", "234567890", "Rua 2", "UFMG", "Letras");
+        carol = new AlunoEntity("Carol", "34567891011", "345678910", "Rua 3", "USP", "Direito");
+
         alunoService = new AlunoService(alunoRepository);
-    }
 
-    @Test
-    void createViaRepository() {
-        alunoRepository.save(alice);
-    }
-
-    @Test
-    void createViaService() {
-        AlunoRequestDTO alunoRequest = new AlunoRequestDTO(
+        aluno1Request = new AlunoRequestDTO(
                 alice.getNome(),
                 alice.getCpf(),
                 alice.getRg(),
@@ -42,6 +41,45 @@ public class CrudTest {
                 alice.getCurso()
         );
 
-        alunoService.criar(alunoRequest);
+        aluno2Request = new AlunoRequestDTO(
+                beatriz.getNome(),
+                beatriz.getCpf(),
+                beatriz.getRg(),
+                beatriz.getEndereco(),
+                beatriz.getInstituicao(),
+                beatriz.getCurso()
+        );
+
+        aluno3Request = new AlunoRequestDTO(
+                carol.getNome(),
+                carol.getCpf(),
+                carol.getRg(),
+                carol.getEndereco(),
+                carol.getInstituicao(),
+                carol.getCurso()
+        );
+    }
+
+    @Test
+    void createViaRepository() {
+        alunoRepository.save(alice);
+        alunoRepository.save(beatriz);
+        alunoRepository.save(carol);
+    }
+
+    @Test
+    void createViaService() {
+        alunoService.criar(aluno1Request);
+        alunoService.criar(aluno2Request);
+        alunoService.criar(aluno3Request);
+    }
+
+    @Test
+    void readAll() {
+        List<AlunoResponseDTO> listaAlunos = new LinkedList<>();
+        listaAlunos.add(alunoService.criar(aluno1Request));
+        listaAlunos.add(alunoService.criar(aluno2Request));
+        listaAlunos.add(alunoService.criar(aluno3Request));
+        assertEquals(alunoService.listarTodos(), listaAlunos);
     }
 }
