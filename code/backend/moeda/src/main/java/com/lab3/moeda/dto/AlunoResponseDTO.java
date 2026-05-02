@@ -1,7 +1,7 @@
 package com.lab3.moeda.dto;
 
 public record AlunoResponseDTO(
-        Long id,
+        int id,
         String nome,
         String cpf,
         String endereco,

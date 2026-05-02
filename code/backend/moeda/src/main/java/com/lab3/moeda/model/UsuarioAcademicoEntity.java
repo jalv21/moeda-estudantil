@@ -30,11 +30,11 @@ public abstract class UsuarioAcademicoEntity extends UsuarioEntity {
         init();
     }
 
-    protected int getSaldo() { return saldo; }
+    public short getSaldoMoedas() { return saldo; }
 
-    protected abstract void creditarMoedas(int valor);
+    public abstract void creditarMoedas(int valor);
 
-    protected abstract void debitarMoedas(int valor);
+    public abstract void debitarMoedas(int valor);
 
-    protected abstract List<TransacaoEntity> consultarHistoricoTransacoes();
+    public abstract List<TransacaoEntity> consultarHistoricoTransacoes();
 }

@@ -18,15 +18,21 @@ public abstract class UsuarioEntity {
         this.senha = "";
     }
 
-    protected String getEmail() { return email; }
+    public String getNome() { return nome; }
 
-    protected void setEmail(String email) {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    protected String getSenha() { return senha; }
+    public String getSenha() { return senha; }
 
-    protected void setSenha(String senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 }

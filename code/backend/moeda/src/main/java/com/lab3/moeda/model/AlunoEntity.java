@@ -39,6 +39,26 @@ public class AlunoEntity extends UsuarioAcademicoEntity {
         this.curso = curso;
     }
 
+    public int getId() { return id; }
+
+    public String getCpf() { return cpf; }
+
+    public String getRg() { return rg; }
+
+    public String getEndereco() { return endereco; }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getInstituicao() { return instituicao; }
+
+    public String getCurso() { return curso; }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
     @Override
     public void creditarMoedas(int valor) {
         if((saldo + valor) > LIMITE_MOEDAS)
