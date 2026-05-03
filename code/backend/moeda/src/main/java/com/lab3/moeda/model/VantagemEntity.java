@@ -23,7 +23,7 @@ public class VantagemEntity {
     private String foto;
 
     @Column
-    private int qtd_estoque;
+    private int qtde_estoque;
 
     public VantagemEntity() {}
 }

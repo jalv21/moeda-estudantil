@@ -14,9 +14,6 @@ public class EmpresaEntity extends UsuarioEntity {
     @Column(unique = true, nullable = false, length = 14)
     private String cnpj;
 
-    @Column(nullable = false, length = 70)
-    private String nome;
-
     @Column(nullable = false, length = 200)
     private String endereco;
 
@@ -28,7 +25,7 @@ public class EmpresaEntity extends UsuarioEntity {
     }
 
     public EmpresaEntity(String nome, String cnpj, String endereco, String email, String senha) {
-        this.nome = nome;
+        super(nome);
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.email = email;
