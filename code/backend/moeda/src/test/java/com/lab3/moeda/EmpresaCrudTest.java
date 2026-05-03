@@ -1,12 +1,16 @@
 package com.lab3.moeda;
 
 import com.lab3.moeda.model.EmpresaEntity;
+import com.lab3.moeda.repository.EmpresaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
 @DataJpaTest
 public class EmpresaCrudTest {
+    @Autowired
+    private EmpresaRepository empresaRepository;
     private EmpresaEntity cafe, papelaria, farmacia;
 
     @BeforeEach
