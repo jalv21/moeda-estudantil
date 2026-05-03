@@ -1,6 +1,7 @@
-package com.lab3.moeda.dto;
+package com.lab3.moeda.dto.response;
 
-public record EmpresaRequestDTO (
+public record EmpresaResponseDTO(
+        int id,
         String nome,
         String cnpj,
         String endereco,
